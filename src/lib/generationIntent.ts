@@ -43,18 +43,40 @@ function toTitleCase(value: string) {
 function cleanPrompt(prompt: string) {
   return prompt
     .replace(/build mode:\s*(app|landing|dashboard)\.?/gi, "")
+    .replace(/\b(create|build|make|generate|design|develop|ban(a|ao|ani)?|bnao|bnau|mujhe|mere ko|please)\b/gi, " ")
+    .replace(/\b(a|an|the|one|new|complete|full|professional|premium|responsive)\b/gi, " ")
+    .replace(/\b(page|website|site|webpage|landing page|web app)\b/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
 function titleFromPrompt(prompt: string) {
+  const original = prompt.toLowerCase();
   const cleaned = cleanPrompt(prompt)
     .replace(/[^a-z0-9\s&-]/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
 
+  if (/\bseo\b|search engine|ranking|rankings|organic traffic|backlink|keyword/.test(original)) {
+    if (/\bagency|services|consulting|company\b/.test(original)) return "SEO Growth Agency";
+    if (/\btool|dashboard|analytics|tracker|audit\b/.test(original)) return "SEO Audit Dashboard";
+    return "SEO Growth Website";
+  }
+
   if (!cleaned) return "Premium AI Creation";
-  return toTitleCase(cleaned.split(" ").slice(0, 5).join(" "));
+  return toTitleCase(cleaned.split(" ").slice(0, 4).join(" "));
+}
+
+function summaryFromPrompt(prompt: string) {
+  const original = prompt.toLowerCase();
+  const cleaned = cleanPrompt(prompt);
+
+  if (/\bseo\b|search engine|ranking|rankings|organic traffic|backlink|keyword/.test(original)) {
+    return "A search-focused website for audits, keyword strategy, ranking proof, content planning, and lead generation.";
+  }
+
+  if (cleaned.length >= 18) return cleaned;
+  return prompt.replace(/\s+/g, " ").trim() || "A premium AI-generated digital experience.";
 }
 
 export function detectGenerationIntent(prompt: string): GenerationIntent {
@@ -68,7 +90,7 @@ export function detectGenerationIntent(prompt: string): GenerationIntent {
 
   const base = {
     title: titleFromPrompt(prompt),
-    summary: normalized || "A premium AI-generated digital experience.",
+    summary: summaryFromPrompt(prompt),
   };
 
   if (isImageOnlyPrompt) {
@@ -179,18 +201,22 @@ export function detectGenerationIntent(prompt: string): GenerationIntent {
     };
   }
 
-  if (/(business site|company|corporate|services|consulting|team|contact form|local business)/.test(lower)) {
+  if (/(seo|search engine|ranking|rankings|organic traffic|keyword|backlink|business site|company|corporate|services|consulting|team|contact form|local business)/.test(lower)) {
     return {
       ...base,
       surface: "website",
       category: "business",
-      styleDirection: "Trust-led company website design with services, team credibility, and clean contact conversion flow.",
-      sectionLabels: ["Services", "Why Us", "Team", "Contact"],
+      styleDirection: /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower)
+        ? "SEO service website with audit-first conversion, keyword/ranking proof, case studies, and consultation CTAs."
+        : "Trust-led company website design with services, team credibility, and clean contact conversion flow.",
+      sectionLabels: /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower)
+        ? ["SEO Audit", "Keyword Strategy", "Ranking Proof", "Growth Plan"]
+        : ["Services", "Why Us", "Team", "Contact"],
       palette: {
-        bg: "#f5f7fb",
+        bg: /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower) ? "#f4fbf8" : "#f5f7fb",
         surface: "#ffffff",
-        accent: "#2563eb",
-        accent2: "#14b8a6",
+        accent: /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower) ? "#16a34a" : "#2563eb",
+        accent2: /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower) ? "#2563eb" : "#14b8a6",
         text: "#1e293b",
         muted: "#64748b",
       },

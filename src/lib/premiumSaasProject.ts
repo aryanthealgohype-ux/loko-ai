@@ -23,6 +23,24 @@ function titleCase(value: string) {
     .join(" ") || "NexaCloud";
 }
 
+function productNameFromPrompt(prompt: string, fallbackTitle: string) {
+  const lower = prompt.toLowerCase();
+
+  if (/\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower)) {
+    if (/\bagency|services|consulting|company\b/.test(lower)) return "SEO Growth Agency";
+    if (/\btool|dashboard|audit|analytics|tracker\b/.test(lower)) return "SEO Audit Dashboard";
+    return "SEO Growth Website";
+  }
+
+  const cleaned = fallbackTitle
+    .replace(/^Build A Complete/i, "")
+    .replace(/\b(create|build|make|generate|design|develop|a|an|the|page|website|site|webpage|complete|full|professional|premium|responsive)\b/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return titleCase(cleaned);
+}
+
 function componentName(label: string) {
   return label.replace(/[^a-z0-9]/gi, " ").split(/\s+/).filter(Boolean).map((part) => part[0].toUpperCase() + part.slice(1)).join("");
 }
@@ -66,13 +84,23 @@ function simpleComponent(name: string, body: string) {
 `;
 }
 
-function previewHtml(productName: string, summary: string) {
+function previewHtml(productName: string, summary: string, mode: "saas" | "seo" = "saas") {
+  const badge = mode === "seo" ? "SEO Growth System" : "AI SaaS Platform";
+  const heroSuffix = mode === "seo" ? "turns search into qualified leads." : "feels like a $100M startup.";
+  const primaryCta = mode === "seo" ? "Get free audit" : "Start free";
+  const secondaryCta = mode === "seo" ? "View ranking wins" : "View demo";
+  const previewLabel = mode === "seo" ? "SEO Dashboard Preview" : "Dashboard Preview";
+  const firstMetric = mode === "seo" ? ["Technical Score", "94/100"] : ["Pipeline", "$428k"];
+  const secondMetric = mode === "seo" ? ["Page-one Keywords", "42"] : ["AI Tasks", "19.4k"];
+  const chartLabel = mode === "seo" ? "Organic Traffic Forecast" : "Automation Velocity";
+  const modules = mode === "seo" ? ["Technical Audit", "Keyword Map", "Content Plan", "Ranking Reports"] : ["AI Agents", "Integrations", "Templates", "Analytics"];
+
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>${esc(productName)} - Premium SaaS</title>
+  <title>${esc(productName)}</title>
   <style>
     *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui;background:#f8fbff;color:#0f172a}
     .shell{min-height:100vh;overflow:hidden;background:radial-gradient(circle at 15% 8%,rgba(37,99,235,.2),transparent 28%),radial-gradient(circle at 85% 15%,rgba(6,182,212,.24),transparent 24%),linear-gradient(180deg,#fff,#eef6ff)}
@@ -95,12 +123,12 @@ function previewHtml(productName: string, summary: string) {
 <body>
   <div class="shell">
     <div class="wrap">
-      <nav><div class="brand"><span class="mark"></span>${esc(productName)}</div><div class="links"><span>Features</span><span>Pricing</span><span>Agents</span><span>Docs</span></div><button class="btn">Start free</button></nav>
+      <nav><div class="brand"><span class="mark"></span>${esc(productName)}</div><div class="links"><span>Services</span><span>Results</span><span>Pricing</span><span>Contact</span></div><button class="btn">${esc(primaryCta)}</button></nav>
       <section class="hero">
-        <div><span class="badge">AI SaaS Platform</span><h1>${esc(productName)} feels like a $100M startup.</h1><p class="sub">${esc(summary)}</p><div class="actions"><button class="btn">Launch workspace</button><button class="btn ghost">View demo</button></div></div>
-        <div class="mock"><div class="top"><b>Dashboard Preview</b><span>Live</span></div><div class="grid"><div class="tile"><span>Pipeline</span><strong>$428k</strong></div><div class="tile"><span>AI Tasks</span><strong>19.4k</strong></div><div class="tile wide"><span>Automation Velocity</span><div class="bars"><i style="height:44%"></i><i style="height:65%"></i><i style="height:54%"></i><i style="height:82%"></i><i style="height:96%"></i></div></div></div></div>
+        <div><span class="badge">${esc(badge)}</span><h1>${esc(productName)} ${esc(heroSuffix)}</h1><p class="sub">${esc(summary)}</p><div class="actions"><button class="btn">${esc(primaryCta)}</button><button class="btn ghost">${esc(secondaryCta)}</button></div></div>
+        <div class="mock"><div class="top"><b>${esc(previewLabel)}</b><span>Live</span></div><div class="grid"><div class="tile"><span>${esc(firstMetric[0])}</span><strong>${esc(firstMetric[1])}</strong></div><div class="tile"><span>${esc(secondMetric[0])}</span><strong>${esc(secondMetric[1])}</strong></div><div class="tile wide"><span>${esc(chartLabel)}</span><div class="bars"><i style="height:44%"></i><i style="height:65%"></i><i style="height:54%"></i><i style="height:82%"></i><i style="height:96%"></i></div></div></div></div>
       </section>
-      <section class="sections">${["AI Agents","Integrations","Templates","Analytics"].map((item) => `<article class="card"><b>${item}</b><p>Production-grade ${item.toLowerCase()} module with premium SaaS hierarchy, motion, and responsive states.</p></article>`).join("")}</section>
+      <section class="sections">${modules.map((item) => `<article class="card"><b>${item}</b><p>Production-grade ${item.toLowerCase()} module with specific copy, useful proof, and conversion-ready responsive states.</p></article>`).join("")}</section>
     </div>
   </div>
 </body>
@@ -117,18 +145,20 @@ export function isPremiumSaasCodebasePrompt(prompt: string) {
 
 export function getPremiumSaasProject(userPrompt: string) {
   const intent = detectGenerationIntent(userPrompt);
-  const productName = titleCase(intent.title.replace(/^Build A Complete/i, "")) || "NexaCloud";
-  const summary =
-    "A polished AI-native SaaS operating layer with multi-page marketing, dashboard preview, agent workflows, templates, integrations, and enterprise-grade UI patterns.";
+  const productName = productNameFromPrompt(userPrompt, intent.title) || "NexaCloud";
+  const isSeo = /\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(userPrompt.toLowerCase());
+  const summary = isSeo
+    ? "A polished SEO growth platform with technical audits, keyword maps, ranking proof, content workflows, consultation funnels, and client-ready reporting."
+    : "A polished AI-native SaaS operating layer with multi-page marketing, dashboard preview, agent workflows, templates, integrations, and enterprise-grade UI patterns.";
 
   const pages = [
-    ["Home", "A premium AI SaaS homepage built for conversion.", "Explore the core product story, motion-rich hero, proof, features, pricing, and enterprise-grade calls to action."],
-    ["Features", "Powerful features for modern AI teams.", "Agent workflows, automations, analytics, knowledge memory, and collaboration surfaces are designed as a complete operating system."],
-    ["Pricing", "Flexible pricing built for teams from launch to scale.", "Transparent tiers, add-ons, usage limits, and annual plans make the platform easy to buy and expand."],
-    ["Integrations", "Connect the tools your team already trusts.", "Sync CRMs, data warehouses, design tools, docs, Slack, GitHub, Stripe, and support platforms."],
-    ["AIAgents", "Deploy specialized AI agents across every workflow.", "Research, write, analyze, support, code, sell, and operate with configurable agent teams."],
-    ["Templates", "Launch faster with premium workflow templates.", "Prebuilt SaaS, support, analytics, CRM, finance, and founder templates accelerate time to value."],
-    ["Blog", "Insights for building with AI-native software.", "Editorial content, product thinking, launch notes, and practical playbooks for modern software teams."],
+    ["Home", isSeo ? "A search-first homepage built to convert audit interest into leads." : "A premium AI SaaS homepage built for conversion.", isSeo ? "Lead with measurable organic growth, technical trust, ranking proof, service clarity, and a strong free-audit CTA." : "Explore the core product story, motion-rich hero, proof, features, pricing, and enterprise-grade calls to action."],
+    ["Features", isSeo ? "SEO services built around audits, keywords, content, and reporting." : "Powerful features for modern AI teams.", isSeo ? "Technical SEO, keyword clustering, content briefs, backlink planning, and conversion reporting are organized into a clear growth system." : "Agent workflows, automations, analytics, knowledge memory, and collaboration surfaces are designed as a complete operating system."],
+    ["Pricing", "Flexible pricing built for teams from launch to scale.", isSeo ? "Transparent audit, growth, and retained SEO plans make the service easier to compare and buy." : "Transparent tiers, add-ons, usage limits, and annual plans make the platform easy to buy and expand."],
+    ["Integrations", isSeo ? "Connect the SEO data stack." : "Connect the tools your team already trusts.", isSeo ? "Bring together Search Console, Analytics, rank tracking, CMS workflows, CRM leads, and reporting exports." : "Sync CRMs, data warehouses, design tools, docs, Slack, GitHub, Stripe, and support platforms."],
+    ["AIAgents", isSeo ? "Automate research-heavy SEO workflows." : "Deploy specialized AI agents across every workflow.", isSeo ? "Use AI to draft briefs, compare SERPs, cluster keywords, outline content, and surface technical fixes for review." : "Research, write, analyze, support, code, sell, and operate with configurable agent teams."],
+    ["Templates", isSeo ? "Launch repeatable SEO growth playbooks." : "Launch faster with premium workflow templates.", isSeo ? "Audit reports, keyword maps, content calendars, local SEO plans, and monthly client summaries are ready to reuse." : "Prebuilt SaaS, support, analytics, CRM, finance, and founder templates accelerate time to value."],
+    ["Blog", isSeo ? "SEO insights, case studies, and ranking playbooks." : "Insights for building with AI-native software.", isSeo ? "Publish practical guides around search intent, technical SEO, topical authority, conversion pages, and reporting." : "Editorial content, product thinking, launch notes, and practical playbooks for modern software teams."],
     ["Careers", "Join the team building the AI work layer.", "A high-agency culture for product engineers, designers, GTM leaders, and AI infrastructure builders."],
     ["AboutUs", "A focused team building the future of work.", "We combine product craft, AI systems, and enterprise discipline to make AI work trustworthy."],
     ["Contact", "Talk to sales or get help from the team.", "Route inbound interest to sales, support, partnerships, and investor conversations."],
@@ -295,7 +325,7 @@ export function getPremiumSaasProject(userPrompt: string) {
     projectTitle: productName,
     description: summary,
     files,
-    previewHtml: previewHtml(productName, summary),
+    previewHtml: previewHtml(productName, summary, isSeo ? "seo" : "saas"),
     workflowLogs: [
       { agent: "Architecture Planner", action: `Generated ${files.length} production files across pages, sections, components, hooks, services, and assets.` },
       { agent: "UI Director", action: "Applied premium SaaS design language with glassmorphism, gradients, motion, and dashboard mockups." },

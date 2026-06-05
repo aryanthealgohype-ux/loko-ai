@@ -114,6 +114,66 @@ function applyPromptPalette(prompt: string, basePalette: WebsitePalette): Websit
 function getWebsiteContent(prompt: string): WebsiteContent {
   const intent = detectGenerationIntent(prompt);
   const { title, summary, category, sectionLabels } = intent;
+  const lower = prompt.toLowerCase();
+
+  if (/\bseo\b|search engine|ranking|rankings|organic traffic|keyword|backlink/.test(lower)) {
+    return {
+      eyebrow: "SEO growth system",
+      headline: "Turn search visibility into qualified leads.",
+      subline:
+        summary ||
+        "A focused SEO website with technical audits, keyword strategy, ranking proof, content planning, and a clear path to book a growth consultation.",
+      primaryCta: "Get free SEO audit",
+      secondaryCta: "See ranking wins",
+      nav: ["Audit", "Strategy", "Results"],
+      stats: [
+        { value: "+184%", label: "organic traffic" },
+        { value: "42", label: "page-one keywords" },
+        { value: "31%", label: "lead lift" },
+      ],
+      features: [
+        {
+          title: "Technical SEO Audit",
+          body: "Scan crawl health, index coverage, page speed, schema, internal links, and conversion blockers before writing a single headline.",
+        },
+        {
+          title: "Keyword Growth Map",
+          body: "Group high-intent keywords by funnel stage so service pages, blogs, and comparison pages work together.",
+        },
+        {
+          title: "Content That Ranks",
+          body: "Build briefs, clusters, metadata, FAQs, and proof-led copy around real search intent instead of generic marketing text.",
+        },
+        {
+          title: "Reporting Dashboard",
+          body: "Show rankings, traffic, conversions, and next actions in a client-friendly view that makes progress obvious.",
+        },
+      ],
+      proofTitle: "A search-first page with proof, services, and conversion flow.",
+      quotes: [
+        "The page explains what the SEO team actually does before asking for a call.",
+        "Audit, keyword, content, and reporting sections make the offer feel specific.",
+        "The hero sells measurable growth instead of repeating the prompt as a headline.",
+      ],
+      visualKicker: "SEO audit preview",
+      visualTitle: "Organic growth snapshot",
+      visualHtml: `
+              <div class="tile"><span>Technical score</span><strong>94/100</strong></div>
+              <div class="tile"><span>Ranking keywords</span><strong>2,418</strong></div>
+              <div class="tile wide">
+                <span>Traffic forecast</span>
+                <div class="chart">
+                  <i class="bar" style="height:38%"></i><i class="bar" style="height:52%"></i><i class="bar" style="height:66%"></i><i class="bar" style="height:81%"></i><i class="bar" style="height:96%"></i>
+                </div>
+              </div>
+              <div class="tile wide list">
+                <div class="row"><b>Meta cleanup</b><span>High impact</span></div>
+                <div class="row"><b>Content clusters</b><span>12 planned</span></div>
+                <div class="row"><b>Core Web Vitals</b><span>Ready</span></div>
+              </div>`,
+      finalTitle: "Book the audit, show the upside, and make the SEO offer concrete.",
+    };
+  }
 
   if (category === "restaurant") {
     return {
@@ -215,7 +275,7 @@ function getWebsiteContent(prompt: string): WebsiteContent {
 
   return {
     eyebrow: `${category.replace(/_/g, " ")} system`,
-    headline: title,
+    headline: title === summary ? "Launch a focused, conversion-ready website." : title,
     subline: summary,
     primaryCta: "Explore platform",
     secondaryCta: "See results",

@@ -242,6 +242,10 @@ async function handlePost(req: Request) {
 
       IMPORTANT:
       - Always generate full working code
+      - Never use the user's raw command sentence as projectTitle, navbar brand, or H1
+      - Convert commands like "create/build/make a ... page/website" into a clean product or business name
+      - For SEO/search/ranking prompts, generate an SEO-specific website with audit, keyword strategy, ranking proof, content plan, reporting, and consultation CTAs
+      - Avoid repeating the same generic SaaS hero, metrics, and cards when the category is services, SEO, restaurant, ecommerce, education, portfolio, real estate, social, or dashboard
       - Obey the user's requested framework and tooling. If the user asks for Vite, generate a Vite project, not Next.js
       - Do not keep everything inside App.tsx
       - Split pages, sections, components, hooks, utilities, data, services, assets, layouts, providers, and styles into separate files
