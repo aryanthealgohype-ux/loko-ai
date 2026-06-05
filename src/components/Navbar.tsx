@@ -173,7 +173,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="xl:hidden absolute top-16 sm:top-20 left-0 right-0 glass border-b border-white/10 p-4"
+            className="fixed left-0 right-0 top-16 z-50 max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-slate-200 bg-white/96 p-4 shadow-[0_24px_80px_rgba(15,23,42,0.18)] backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/96 sm:top-20 xl:hidden"
           >
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
@@ -184,7 +184,7 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                   onMouseEnter={() => prefetchRoute(item.href)}
                   onFocus={() => prefetchRoute(item.href)}
-                  className={`px-4 py-3 rounded-xl text-base font-medium flex items-center gap-3 ${
+                  className={`flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium ${
                     pathname === item.href
                       ? "bg-sky-500/10 text-slate-950 dark:bg-white/10 dark:text-white"
                       : "text-slate-500 hover:text-slate-950 dark:text-gray-400 dark:hover:text-white hover:bg-sky-500/10 dark:hover:bg-white/5"

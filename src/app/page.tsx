@@ -506,74 +506,66 @@ export default function Home() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
-          <div className="grid grid-cols-2 gap-3 md:hidden">
-            {integrationTools.slice(0, 12).map((tool) => (
-              <div key={tool.name} className={`flex min-h-24 flex-col items-center justify-center gap-2 rounded-3xl border p-4 text-center backdrop-blur-sm ${tool.card}`}>
-                <tool.icon className="h-8 w-8" />
-                <span className="text-xs font-bold text-slate-700 dark:text-white">{tool.name}</span>
-              </div>
-            ))}
-          </div>
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative hidden h-[480px] overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-50 p-6 shadow-2xl dark:border-white/10 dark:bg-slate-900/50 md:block">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
+          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="relative h-[330px] overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50 p-4 shadow-2xl dark:border-white/10 dark:bg-slate-900/50 sm:h-[390px] sm:p-5 md:h-[480px] md:rounded-[2rem] md:p-6">
+            <div className="mb-3 flex items-center justify-between border-b border-slate-200 pb-3 dark:border-white/10 md:mb-4 md:pb-4">
               <div className="flex gap-1.5">
-                <span className="w-3.5 h-3.5 rounded-full bg-red-400 shadow-sm" />
-                <span className="w-3.5 h-3.5 rounded-full bg-amber-400 shadow-sm" />
-                <span className="w-3.5 h-3.5 rounded-full bg-emerald-400 shadow-sm" />
+                <span className="h-3 w-3 rounded-full bg-red-400 shadow-sm md:h-3.5 md:w-3.5" />
+                <span className="h-3 w-3 rounded-full bg-amber-400 shadow-sm md:h-3.5 md:w-3.5" />
+                <span className="h-3 w-3 rounded-full bg-emerald-400 shadow-sm md:h-3.5 md:w-3.5" />
               </div>
-              <div className="text-[10px] font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest">
+              <div className="truncate px-2 text-[9px] font-bold uppercase tracking-[0.16em] text-slate-400 dark:text-gray-500 md:text-[10px]">
                 LokoAI Integrations Mockup
               </div>
-              <div className="w-12 h-2" />
+              <div className="h-2 w-8 md:w-12" />
             </div>
-            <div className="grid grid-cols-4 gap-4 h-[380px] overflow-hidden relative justify-items-center px-2">
+            <div className="relative grid h-[260px] grid-cols-4 justify-items-center gap-3 overflow-hidden px-1 sm:h-[310px] md:h-[380px] md:gap-4 md:px-2">
               <div className="absolute top-0 inset-x-0 h-10 bg-gradient-to-b from-slate-50 dark:from-slate-950 to-transparent z-10 pointer-events-none" />
               <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-slate-50 dark:from-slate-950 to-transparent z-10 pointer-events-none" />
-              <div className="flex flex-col gap-4 animate-marquee-vertical-up will-change-transform">
+              <div className="flex flex-col gap-3 animate-marquee-vertical-up will-change-transform md:gap-4">
                 {integrationTools.slice(0, 3).map((tool, idx) => (
-                  <div key={`c1-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c1-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
                 {integrationTools.slice(0, 3).map((tool, idx) => (
-                  <div key={`c1-dup-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c1-dup-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-4 animate-marquee-vertical-down will-change-transform">
+              <div className="flex flex-col gap-3 animate-marquee-vertical-down will-change-transform md:gap-4">
                 {integrationTools.slice(3, 6).map((tool, idx) => (
-                  <div key={`c2-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c2-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
                 {integrationTools.slice(3, 6).map((tool, idx) => (
-                  <div key={`c2-dup-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c2-dup-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-4 animate-marquee-vertical-up will-change-transform">
+              <div className="flex flex-col gap-3 animate-marquee-vertical-up will-change-transform md:gap-4">
                 {integrationTools.slice(6, 9).map((tool, idx) => (
-                  <div key={`c3-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c3-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
                 {integrationTools.slice(6, 9).map((tool, idx) => (
-                  <div key={`c3-dup-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c3-dup-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-4 animate-marquee-vertical-down will-change-transform">
+              <div className="flex flex-col gap-3 animate-marquee-vertical-down will-change-transform md:gap-4">
                 {integrationTools.slice(9, 12).map((tool, idx) => (
-                  <div key={`c4-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c4-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
                 {integrationTools.slice(9, 12).map((tool, idx) => (
-                  <div key={`c4-dup-${idx}`} className={`pointer-events-none flex h-16 w-16 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm ${tool.card}`}>
-                    <tool.icon className="w-9 h-9" />
+                  <div key={`c4-dup-${idx}`} className={`pointer-events-none flex h-14 w-14 flex-shrink-0 select-none items-center justify-center rounded-2xl border backdrop-blur-sm md:h-16 md:w-16 ${tool.card}`}>
+                    <tool.icon className="h-8 w-8 md:h-9 md:w-9" />
                   </div>
                 ))}
               </div>
