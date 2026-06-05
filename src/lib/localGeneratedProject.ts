@@ -349,7 +349,8 @@ function buildWebsitePreview(prompt: string) {
     .cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;background:linear-gradient(135deg,${palette.accent},${palette.accent2});color:white;text-decoration:none;font-weight:850;box-shadow:0 14px 34px ${palette.accent}35}
     .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.92fr);gap:34px;align-items:center;padding:70px 0 42px}
     .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border-radius:999px;background:white;border:1px solid rgba(148,163,184,.22);box-shadow:0 10px 28px rgba(15,23,42,.06);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.14em;color:${palette.accent}}
-    h1{font-size:clamp(46px,7vw,82px);line-height:.95;letter-spacing:-.065em;margin:18px 0 20px;max-width:780px}
+    h1{font-size:clamp(46px,7vw,82px);line-height:.95;letter-spacing:-.045em;margin:18px 0 20px;max-width:780px;font-weight:500}
+    strong,b{font-weight:500}
     .sub{font-size:18px;line-height:1.75;color:${palette.muted};max-width:680px}
     .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
     .secondary{padding:12px 18px;border-radius:999px;border:1px solid rgba(148,163,184,.28);text-decoration:none;color:${palette.text};font-weight:760;background:white}

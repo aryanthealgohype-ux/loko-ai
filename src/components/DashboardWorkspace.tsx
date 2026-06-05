@@ -54,7 +54,7 @@ import { assistants } from "@/app/collection/collection-data";
 import { FileCard, type FileCardData } from "@/components/file-card/FileCard";
 import { ModelPicker } from "@/components/ModelPicker";
 import UserMenu from "@/components/UserMenu";
-import { DASHBOARD_HISTORY_STORAGE_KEY, removeStoredProject } from "@/lib/project-history";
+import { DASHBOARD_HISTORY_STORAGE_KEY, getDeletedStoredProjectIds, markStoredProjectDeleted } from "@/lib/project-history";
 import {
   DEFAULT_SELECTED_OPENROUTER_MODEL,
   SELECTED_MODEL_STORAGE_KEY,
@@ -314,10 +314,12 @@ function loadLocalProjects(): Project[] {
     const raw = window.localStorage.getItem(DASHBOARD_HISTORY_STORAGE_KEY);
     const parsed = raw ? (JSON.parse(raw) as unknown[]) : [];
     if (!Array.isArray(parsed)) return [];
+    const deletedIds = getDeletedStoredProjectIds();
 
     return parsed
       .map(normalizeProject)
       .filter((project): project is Project => Boolean(project))
+      .filter((project) => !deletedIds.has(project.id))
       .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
   } catch {
     return [];
@@ -1481,12 +1483,14 @@ export default function DashboardWorkspace() {
 
   const syncProjectsState = useCallback((updater: (current: Project[]) => Project[]) => {
     setProjects((current) => {
+      const deletedIds = getDeletedStoredProjectIds();
       const next = updater(current)
         .map((project) => ({
           ...project,
           generated_code: normalizeGeneratedFiles(project.generated_code),
           chat_messages: normalizeMessages(project.chat_messages),
         }))
+        .filter((project) => !deletedIds.has(project.id))
         .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
       persistLocalProjects(next);
       return next;
@@ -1515,9 +1519,12 @@ export default function DashboardWorkspace() {
           chat_messages: normalizeMessages(project.chat_messages),
         }));
           const localProjects = loadLocalProjects();
+          const deletedIds = getDeletedStoredProjectIds();
           const resolvedProjects = Array.from(
             new Map([...localProjects, ...nextProjects].map((project) => [project.id, project])).values()
-          ).sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+          )
+            .filter((project) => !deletedIds.has(project.id))
+            .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
         setProjects(resolvedProjects);
         persistLocalProjects(resolvedProjects);
         setIsLoadingProjects(false);
@@ -1718,9 +1725,8 @@ export default function DashboardWorkspace() {
   async function handleDeleteProject(projectId: string) {
     if (deletingProjectId) return;
     setDeletingProjectId(projectId);
-    const previousProjects = projects;
     syncProjectsState((current) => current.filter((project) => project.id !== projectId));
-    removeStoredProject(projectId);
+    markStoredProjectDeleted(projectId);
     if (activeChatId === projectId) startNewChat();
     if (activeBuildProject?.id === projectId) {
       setActiveBuildProject(null);
@@ -1732,7 +1738,6 @@ export default function DashboardWorkspace() {
       if (!response.ok) throw new Error("Delete failed");
     } catch (error) {
       console.warn("Failed to delete chat:", error);
-      syncProjectsState(() => previousProjects);
     } finally {
       setDeletingProjectId(null);
     }
@@ -2344,7 +2349,7 @@ export default function DashboardWorkspace() {
                   {filteredProjects.slice(0, 20).map((project) => (
                     <div key={project.id} className={`group relative flex items-center gap-2 rounded-xl px-3 py-2.5 transition hover:bg-white hover:shadow-sm hover:ring-1 hover:ring-slate-100 ${activeChatId === project.id ? "bg-white shadow-sm ring-1 ring-slate-100" : ""}`}>
                       <button type="button" onClick={() => openProject(project)} className="min-w-0 flex-1 text-left" title={project.prompt || project.title}>
-                        <span className={`line-clamp-1 text-sm ${activeChatId === project.id ? "font-medium text-slate-900" : "text-slate-600"}`}>{project.title || project.prompt || "Untitled chat"}</span>
+                        <span className={`line-clamp-1 text-sm font-normal ${activeChatId === project.id ? "text-slate-900" : "text-slate-600"}`}>{project.title || project.prompt || "Untitled chat"}</span>
                         <span className="mt-0.5 block text-[10px] font-normal text-slate-400">{getTimeAgo(project.updated_at || project.created_at)}</span>
                       </button>
                       <button type="button" onClick={() => void handleDeleteProject(project.id)} className="rounded-lg p-1.5 text-slate-400 opacity-0 transition hover:bg-red-50 hover:text-red-600 group-hover:opacity-100" aria-label={`Delete ${project.title || "chat"}`}>
@@ -2354,7 +2359,7 @@ export default function DashboardWorkspace() {
                   ))}
                 </div>
               ) : (
-                <p className="px-4 py-2 text-xs font-medium text-slate-400">No recent chats yet.</p>
+                <p className="px-4 py-2 text-xs font-normal text-slate-400">No recent chats yet.</p>
               )}
             </div>
 

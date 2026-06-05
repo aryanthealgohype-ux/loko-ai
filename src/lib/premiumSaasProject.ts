@@ -110,7 +110,7 @@ function previewHtml(productName: string, summary: string, mode: "saas" | "seo" 
     .links{display:flex;gap:18px;color:#64748b;font-size:14px;font-weight:700}.btn{border:0;border-radius:999px;background:linear-gradient(135deg,#2563eb,#06b6d4);color:#fff;padding:12px 18px;font-weight:900}
     .hero{display:grid;grid-template-columns:1fr .9fr;gap:36px;align-items:center;padding:74px 0}
     .badge{display:inline-flex;border-radius:999px;background:#fff;border:1px solid rgba(148,163,184,.25);padding:8px 12px;color:#2563eb;font-size:11px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}
-    h1{font-size:clamp(48px,7vw,86px);line-height:.92;letter-spacing:-.07em;margin:18px 0}.sub{font-size:18px;line-height:1.75;color:#64748b;max-width:680px}
+    h1{font-size:clamp(48px,7vw,86px);line-height:.94;letter-spacing:-.045em;margin:18px 0;font-weight:500}.sub{font-size:18px;line-height:1.75;color:#64748b;max-width:680px} strong,b{font-weight:500}
     .actions{display:flex;gap:14px;margin-top:28px}.ghost{background:#fff;color:#0f172a;border:1px solid rgba(148,163,184,.26)}
     .mock{border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.84);border-radius:34px;padding:16px;box-shadow:0 36px 100px rgba(15,23,42,.16)}
     .top{display:flex;justify-content:space-between;padding:10px 8px 16px;border-bottom:1px solid rgba(148,163,184,.18);color:#64748b;font-size:13px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px}

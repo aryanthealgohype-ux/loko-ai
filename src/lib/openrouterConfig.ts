@@ -45,11 +45,12 @@ const DEFAULT_CODER_MODELS = [
   "meta-llama/llama-3.3-70b-instruct:free",
 ];
 const DEFAULT_IMAGE_MODELS = [
+  "openai/gpt-5.4-image-2",
+  "google/gemini-3.1-flash-image-preview",
+  "google/gemini-3-pro-image-preview",
   "google/gemini-2.5-flash-image",
   "openai/gpt-5-image-mini",
-  "black-forest-labs/flux.2-pro",
-  "black-forest-labs/flux.2-flex",
-  "black-forest-labs/flux.2-klein-4b",
+  "openai/gpt-5-image",
 ];
 const DEFAULT_SEARCH_MODELS = [
   "anthropic/claude-opus-4.8-fast",

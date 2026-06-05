@@ -41,7 +41,7 @@ function ModelLogo({ model, size = "md" }: { model: OpenRouterModelOption; size?
         // eslint-disable-next-line @next/next/no-img-element
         <img src={src} alt={`${model.name} logo`} className={`${imageSize} object-contain`} style={{ filter: logoTheme.filter }} />
       ) : (
-        <span className="text-[10px] font-black tracking-tight text-sky-600">{initials}</span>
+        <span className="text-[10px] font-medium tracking-tight text-sky-600">{initials}</span>
       )}
     </span>
   );
@@ -80,7 +80,7 @@ function ModelGridCard({
     >
       <ModelLogo model={model} />
       <div className="min-w-0 flex-1">
-        <p className="line-clamp-2 break-words text-sm font-medium leading-snug text-slate-900 sm:text-[15px]">{model.name}</p>
+        <p className="line-clamp-2 break-words text-sm font-normal leading-snug text-slate-900 sm:text-[15px]">{model.name}</p>
       </div>
       {isSelected && (
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-500 text-white shadow-md">
@@ -143,7 +143,7 @@ export function ModelPicker({ selectedModelId, onModelChange }: ModelPickerProps
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="group inline-flex h-9 max-w-[168px] items-center gap-1.5 rounded-full border border-slate-200 bg-white py-0.5 pl-1 pr-2 text-[12px] font-medium text-slate-700 shadow-[0_2px_8px_rgba(15,23,42,0.08)] transition hover:border-sky-200 hover:bg-sky-50 hover:text-slate-950 sm:h-10 sm:max-w-[260px] sm:gap-2 sm:pl-1.5 sm:pr-2.5 sm:text-[13px]"
+        className="group inline-flex h-9 max-w-[168px] items-center gap-1.5 rounded-full border border-slate-200 bg-white py-0.5 pl-1 pr-2 text-[12px] font-normal text-slate-700 shadow-[0_2px_8px_rgba(15,23,42,0.08)] transition hover:border-sky-200 hover:bg-sky-50 hover:text-slate-950 sm:h-10 sm:max-w-[260px] sm:gap-2 sm:pl-1.5 sm:pr-2.5 sm:text-[13px]"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
       >
@@ -154,20 +154,20 @@ export function ModelPicker({ selectedModelId, onModelChange }: ModelPickerProps
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-slate-950/20 p-3 backdrop-blur-md sm:p-6"
+          className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-950/20 p-2 pt-4 backdrop-blur-md sm:p-6"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) setIsOpen(false);
           }}
         >
           <div
-            className="flex max-h-[calc(100dvh-1.5rem)] w-full max-w-[1040px] animate-in fade-in-0 zoom-in-95 flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_32px_90px_rgba(15,23,42,0.28)] duration-200 sm:max-h-[calc(100dvh-3rem)] sm:rounded-[28px]"
+            className="flex max-h-[calc(100dvh-2rem)] w-full max-w-[920px] animate-in fade-in-0 zoom-in-95 flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_32px_90px_rgba(15,23,42,0.28)] duration-200 sm:max-h-[calc(100dvh-3rem)] sm:rounded-[24px]"
             role="dialog"
             aria-modal="true"
             aria-label="Select model"
           >
             <div className="sticky top-0 z-10 shrink-0 border-b border-slate-200 bg-white/95 px-5 py-4 backdrop-blur-xl sm:px-6">
               <div className="mb-3 flex items-center justify-between gap-4">
-                <h2 className="text-2xl font-semibold tracking-tight text-slate-950 sm:text-[28px]">Select Model</h2>
+                <h2 className="text-xl font-normal tracking-tight text-slate-950 sm:text-2xl">Select Model</h2>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
@@ -195,7 +195,7 @@ export function ModelPicker({ selectedModelId, onModelChange }: ModelPickerProps
                     key={item}
                     type="button"
                     onClick={() => setFilter(item)}
-                    className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-300 ${
+                    className={`shrink-0 rounded-full px-3.5 py-1.5 text-sm font-normal transition-all duration-300 ${
                       filter === item
                         ? "bg-[#2f63bf] text-white shadow-sm"
                         : "bg-slate-100 text-slate-700 hover:bg-slate-200"
