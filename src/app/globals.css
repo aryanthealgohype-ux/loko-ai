@@ -228,7 +228,10 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   scrollbar-gutter: stable;
-  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   background-color: var(--background);
   transition: background-color 240ms ease, color 240ms ease;
 }
@@ -250,6 +253,12 @@ html.glass [data-radix-popper-content-wrapper] {
 body.app-shell-active {
   height: 100dvh;
   overflow: hidden;
+}
+
+[data-scroll-region] {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
 }
 
 .glass {

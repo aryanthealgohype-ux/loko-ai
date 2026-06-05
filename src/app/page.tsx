@@ -385,7 +385,7 @@ export default function Home() {
     <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-white via-sky-50/35 to-white text-slate-900 dark:bg-slate-950 dark:text-white">
       <section
         id="home-hero"
-        className="relative z-10 flex min-h-[calc(100svh-5rem)] w-full items-center justify-center overflow-hidden border-b border-slate-100 bg-white px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-8"
+        className="relative z-10 flex min-h-[560px] w-full items-center justify-center overflow-hidden border-b border-slate-100 bg-white px-4 py-8 text-center sm:min-h-[620px] sm:px-6 sm:py-10 lg:min-h-[680px] lg:px-8"
       >
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.09)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.09)_1px,transparent_1px)] bg-[size:28px_28px]" />
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle,rgba(14,165,233,0.17)_1px,transparent_1.5px)] bg-[size:28px_28px] opacity-70" />
@@ -443,9 +443,9 @@ export default function Home() {
               initial={{ width: 0, opacity: 0, x: -18, filter: "blur(14px)" }}
               animate={{ width: "auto", opacity: 1, x: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.85 }}
-              className="ml-4 overflow-hidden sm:ml-5"
+              className="ml-3 overflow-hidden sm:ml-4"
             >
-              <span className="block whitespace-nowrap text-[clamp(2.8rem,8vw,5.2rem)] font-semibold leading-none tracking-normal text-slate-900 dark:text-white">
+              <span className="block whitespace-nowrap text-[clamp(2.55rem,7vw,4.8rem)] font-semibold leading-none tracking-normal text-slate-900 dark:text-white">
                 Loko<span className="text-sky-500">AI</span>
               </span>
             </motion.div>
@@ -455,19 +455,19 @@ export default function Home() {
             initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.78, ease: "easeOut", delay: 1.85 }}
-            className="relative mt-7 w-full max-w-3xl sm:mt-9"
+            className="relative mt-5 w-full max-w-3xl sm:mt-7"
           >
-            <p className="mx-auto max-w-2xl text-[clamp(1.25rem,2.7vw,1.95rem)] font-medium leading-[1.24] text-slate-700 dark:text-slate-200">
+            <p className="mx-auto max-w-2xl text-[clamp(1.18rem,2.35vw,1.75rem)] font-medium leading-[1.24] text-slate-700 dark:text-slate-200">
               Your friendly AI partner for building, creating, and growing ideas faster.
             </p>
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400 sm:text-lg">
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-500 dark:text-slate-400 sm:text-lg">
               LokoAI turns your imagination into beautiful digital experiences with clarity, speed, and a little everyday magic.
             </p>
           </motion.div>
         </motion.div>
       </section>
-      <section className="relative z-10 overflow-hidden border-y border-slate-100 bg-slate-50/50 py-10 dark:border-white/5 dark:bg-slate-950/20 sm:py-12">
-        <div className="max-w-7xl mx-auto px-4 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <section className="relative z-10 overflow-hidden border-y border-slate-100 bg-slate-50/50 py-8 dark:border-white/5 dark:bg-slate-950/20 sm:py-10">
+        <div className="max-w-7xl mx-auto px-4 mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-400">
             Our Trusted Customers
           </p>

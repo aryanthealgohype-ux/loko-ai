@@ -1451,7 +1451,7 @@ export default function DashboardWorkspace() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { user, isLoading, signOut } = useAuth();
+  const { user, isLoading } = useAuth();
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<View>("chat");
@@ -1718,7 +1718,7 @@ export default function DashboardWorkspace() {
     setBuilderTab(project.preview_html ? "preview" : "code");
     setPrompt("");
     setActiveView("chat");
-    setActiveNavLabel("Projects");
+    setActiveNavLabel("Dashboard");
     setIsSidebarOpen(false);
   }
 
@@ -2268,7 +2268,7 @@ export default function DashboardWorkspace() {
     <div data-app-shell className="h-dvh overflow-hidden bg-background text-foreground">
       <div className="flex h-full min-h-0 overflow-hidden">
         <aside
-          className={`scrollbar-soft fixed inset-y-0 left-0 z-40 h-dvh w-[280px] overflow-y-auto overscroll-contain border-r border-sidebar-border bg-sidebar px-4 py-6 text-sidebar-foreground backdrop-blur-xl transition-transform lg:static lg:translate-x-0 ${
+          className={`scrollbar-soft fixed inset-y-0 left-0 z-40 h-dvh w-[280px] touch-pan-y overflow-y-auto overscroll-y-auto border-r border-sidebar-border bg-sidebar px-4 py-6 text-sidebar-foreground backdrop-blur-xl transition-transform lg:static lg:translate-x-0 ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -2287,7 +2287,7 @@ export default function DashboardWorkspace() {
 
             <button type="button" onClick={startNewChat} className="group mb-2 flex h-11 w-full items-center gap-3 rounded-xl bg-white border border-slate-200 px-4 text-sm font-normal text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]">
               <Plus className="h-4 w-4 text-slate-400 transition group-hover:text-slate-600" />
-              New chat
+              New Project
             </button>
 
             <button type="button" onClick={() => setIsSearchOpen((open) => !open)} className="mb-6 flex h-11 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-slate-500 transition hover:bg-white hover:text-slate-900">
@@ -2403,6 +2403,15 @@ export default function DashboardWorkspace() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                type="button"
+                onClick={startNewChat}
+                className="flex h-8 w-8 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition hover:border-sky-200 hover:bg-sky-50 hover:text-sky-600 sm:h-9 sm:w-9 dark:border-[#374151] dark:bg-[#1F2937] dark:text-[#F9FAFB]"
+                aria-label="New project"
+                title="New Project"
+              >
+                <Plus className="h-4 w-4" />
+              </button>
               <button type="button" onClick={() => setActiveView("pricing")} className="inline-flex h-8 items-center gap-1.5 rounded-full bg-sky-50 px-3 text-[11px] font-normal text-sky-600 transition hover:bg-sky-100 sm:h-9 sm:gap-2 sm:px-5 sm:text-xs">
                 <Sparkles className="h-3.5 w-3.5" />
                 <span className="hidden min-[360px]:inline">Upgrade Pro</span>
@@ -2475,7 +2484,7 @@ export default function DashboardWorkspace() {
                           </div>
                         </div>
                       </div>
-                      <div className="scrollbar-none min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-6 sm:px-5">
+                      <div data-scroll-region className="scrollbar-none min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-y-auto px-4 py-6 sm:px-5">
                         <div className="space-y-7">
                           {messages.map((message) => (
                             <div key={message.id} className="space-y-4">
@@ -2539,7 +2548,7 @@ export default function DashboardWorkspace() {
                 )}
               </div>
             ) : (
-              <div className="scrollbar-soft min-h-0 flex-1 overflow-y-auto overscroll-contain">
+              <div data-scroll-region className="scrollbar-soft min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-y-auto">
                 {activeView === "integrations" && <IntegrationsPage />}
                 {activeView === "dashboard" && (
                   <DashboardOverview

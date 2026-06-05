@@ -2,22 +2,17 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Sparkles, LayoutGrid, Zap, Users, Rocket, Trophy, Menu, X, Sun, Moon, LogOut, Gauge, Library } from "lucide-react";
+import { Sparkles, LayoutGrid, Users, Menu, X, Sun, Moon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthModal from "@/components/AuthModal";
 import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/useAuth";
-import UserMenu from "@/components/UserMenu";
 
 const navItems = [
   { name: "Home", href: "/", icon: Sparkles },
   { name: "Connect Hub", href: "/integrations", icon: LayoutGrid },
   { name: "Partner Network", href: "/partners", icon: Users },
-  { name: "Launch Lab", href: "/launchpad", icon: Rocket },
-  { name: "Agent Library", href: "/collection", icon: Library },
-  { name: "Growth Hub", href: "/affiliate", icon: Trophy },
-  { name: "Plans", href: "/pricing", icon: Zap },
 ];
 
 export default function Navbar() {
@@ -26,7 +21,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { user, isLoading, signOut } = useAuth();
+  const { user, isLoading } = useAuth();
   const currentTheme = theme;
 
   useEffect(() => {
@@ -124,22 +119,8 @@ export default function Navbar() {
               )}
             </button>
 
-            {!isLoading && user ? (
-              <div className="flex items-center gap-4">
-                <Link 
-                  href="/dashboard" 
-                  prefetch
-                  onMouseEnter={() => prefetchRoute("/dashboard")}
-                  onFocus={() => prefetchRoute("/dashboard")}
-                  className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 dark:border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-sky-500/10 dark:text-gray-200"
-                >
-                  <Gauge className="h-4 w-4 text-sky-500" />
-                  Dashboard
-                </Link>
-                <UserMenu />
-              </div>
-            ) : (
-              <>                {pathname === "/" ? null : (
+            <>
+              {!isLoading && !user && pathname !== "/" ? (
                   <button
                     type="button"
                     onClick={() => setIsAuthOpen(true)}
@@ -147,18 +128,17 @@ export default function Navbar() {
                   >
                     Log in
                   </button>
-                )}
-                <Link
-                  href="/login?next=/dashboard"
+              ) : null}
+              <Link
+                  href={user ? "/dashboard" : "/login?next=/dashboard"}
                   prefetch
-                  onMouseEnter={() => prefetchRoute("/login?next=/dashboard")}
-                  onFocus={() => prefetchRoute("/login?next=/dashboard")}
+                  onMouseEnter={() => prefetchRoute(user ? "/dashboard" : "/login?next=/dashboard")}
+                  onFocus={() => prefetchRoute(user ? "/dashboard" : "/login?next=/dashboard")}
                   className="relative inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-bold text-slate-950 dark:text-black bg-gradient-to-r from-sky-400 to-cyan-300 hover:from-sky-300 hover:to-cyan-200 transition-all duration-300 shadow-md shadow-sky-500/10 hover:shadow-lg hover:shadow-sky-500/20 active:scale-95"
                 >
                   Get Started
                 </Link>
-              </>
-            )}
+            </>
           </div>
 
           {/* Mobile menu button */}
@@ -217,32 +197,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="pt-4 mt-2 border-t border-white/5 flex flex-col gap-3">
-                {!isLoading && user ? (
-                  <>
-                    <Link
-                      href="/dashboard"
-                      prefetch
-                      onClick={() => setIsOpen(false)}
-                      onMouseEnter={() => prefetchRoute("/dashboard")}
-                      onFocus={() => prefetchRoute("/dashboard")}
-                      className="flex items-center justify-center gap-2 rounded-xl bg-white/5 py-3 font-bold text-slate-700 dark:text-white"
-                    >
-                      <Gauge className="h-4 w-4 text-sky-500" />
-                      Dashboard
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsOpen(false);
-                        void signOut();
-                      }}
-                      className="flex w-full items-center justify-center gap-2 rounded-xl py-3 font-bold text-red-500"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      Logout
-                    </button>
-                  </>
-                ) : (
+                {!isLoading && !user ? (
                   <>
                     {pathname === "/" ? null : (
                       <button
@@ -267,6 +222,17 @@ export default function Navbar() {
                       Get Started
                     </Link>
                   </>
+                ) : (
+                  <Link
+                    href="/dashboard"
+                    prefetch
+                    onClick={() => setIsOpen(false)}
+                    onMouseEnter={() => prefetchRoute("/dashboard")}
+                    onFocus={() => prefetchRoute("/dashboard")}
+                    className="flex w-full items-center justify-center rounded-xl brand-btn py-3 font-bold"
+                  >
+                    Get Started
+                  </Link>
                 )}
               </div>
             </div>
