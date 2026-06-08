@@ -53,7 +53,7 @@ function LoginContent() {
 
   return (
     <AuthExperience>
-      <section className="relative z-10 grid w-full max-w-[1600px] grid-cols-1 overflow-hidden rounded-[24px] border border-white/70 bg-white/45 shadow-[0_40px_120px_rgba(37,99,235,0.12)] backdrop-blur-2xl sm:w-[95%] lg:h-[90vh] lg:max-h-[900px] lg:min-h-[760px] lg:grid-cols-[48fr_52fr] lg:rounded-[32px]">
+      <section className="relative z-10 grid w-full max-w-[1600px] grid-cols-1 overflow-hidden rounded-[24px] border border-white/70 bg-white/45 shadow-[0_40px_120px_rgba(37,99,235,0.12)] backdrop-blur-2xl sm:w-[95%] lg:h-[90vh] lg:max-h-[900px] lg:min-h-[760px] lg:grid-cols-[48fr_52fr] lg:overflow-visible lg:rounded-[32px]">
         <div className="relative flex min-h-[42rem] flex-col overflow-hidden px-5 py-6 sm:px-8 lg:min-h-0 lg:px-10 lg:py-8 xl:px-12">
           <FloatingCubes />
 
@@ -109,7 +109,7 @@ function LoginContent() {
           </div>
         </div>
 
-        <div className="relative z-10 flex items-center justify-center px-5 py-6 sm:px-8 lg:px-8 lg:py-8 xl:px-12">
+        <div className="relative z-10 flex min-h-0 items-center justify-center px-5 py-6 sm:px-8 lg:px-8 lg:py-6 xl:px-10">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12),transparent_55%)]" />
           <AuthPanel nextPath={nextPath} variant="page" />
         </div>

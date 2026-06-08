@@ -184,19 +184,19 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
           className={cn(
             "relative overflow-hidden border border-white/70 bg-white/82 backdrop-blur-2xl",
             isPage
-              ? "rounded-[24px] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_24px_70px_rgba(15,23,42,0.12)] sm:rounded-[32px] sm:p-8 lg:p-9 xl:p-12"
+              ? "rounded-[24px] p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.95),0_24px_70px_rgba(15,23,42,0.12)] sm:rounded-[32px] sm:p-7 lg:p-8 xl:p-9 2xl:p-10"
               : "rounded-[1.7rem] p-6 shadow-[0_10px_30px_rgba(15,23,42,0.10)]"
           )}
         >
           <div className="pointer-events-none absolute inset-x-8 top-0 h-28 rounded-b-[2rem] bg-gradient-to-b from-blue-100/70 via-violet-50/50 to-transparent blur-2xl" />
 
           <div className="relative">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-violet-100 bg-white/80 text-violet-600 shadow-[0_14px_34px_rgba(124,58,237,0.12)]">
-              <ShieldCheck className="h-6 w-6" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-violet-100 bg-white/80 text-violet-600 shadow-[0_14px_34px_rgba(124,58,237,0.12)]">
+              <ShieldCheck className="h-5 w-5" />
             </div>
 
-            <div className="mt-6 xl:mt-7">
-              <h2 className={cn("font-black tracking-tight text-slate-950", isPage ? "text-4xl sm:text-[44px] xl:text-5xl" : "text-2xl")}>
+            <div className="mt-5">
+              <h2 className={cn("font-black tracking-tight text-slate-950", isPage ? "text-4xl sm:text-[40px] xl:text-[44px]" : "text-2xl")}>
                 Welcome Back!
               </h2>
               <p className="mt-3 text-base font-medium leading-7 text-slate-600 xl:text-lg">
@@ -210,7 +210,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
               </div>
             )}
 
-            <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:mt-8">
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={() => handleOAuth("google")}
@@ -231,7 +231,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
               </button>
             </div>
 
-            <div className="my-7 flex items-center gap-5 xl:my-8">
+            <div className="my-5 flex items-center gap-5 xl:my-6">
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-slate-200 to-slate-200" />
               <span className="text-sm font-bold text-slate-500">or</span>
               <div className="h-px flex-1 bg-gradient-to-l from-transparent via-slate-200 to-slate-200" />
@@ -242,7 +242,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
                 type="button"
                 onClick={() => setMode("email")}
                 className={cn(
-                  "relative h-14 text-sm font-bold transition",
+                  "relative h-12 text-sm font-bold transition",
                   mode === "email" ? "text-violet-600" : "text-slate-500 hover:text-slate-800"
                 )}
               >
@@ -253,7 +253,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
                 type="button"
                 onClick={() => setMode("phone")}
                 className={cn(
-                  "relative h-14 text-sm font-bold transition",
+                  "relative h-12 text-sm font-bold transition",
                   mode === "phone" ? "text-violet-600" : "text-slate-500 hover:text-slate-800"
                 )}
               >
@@ -263,10 +263,10 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
             </div>
 
             {mode === "email" ? (
-              <div className="mt-6 space-y-4 xl:mt-7 xl:space-y-5">
+              <div className="mt-5 space-y-3 xl:space-y-4">
                 <label className="block">
                   <span className="text-sm font-bold text-slate-800">Email Address</span>
-                  <span className="mt-3 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] transition focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
+                  <span className="mt-2 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] transition focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
                     <Mail className="h-5 w-5 text-slate-400" />
                     <input
                       value={email}
@@ -280,7 +280,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
 
                 <label className="block">
                   <span className="text-sm font-bold text-slate-800">Password</span>
-                  <span className="mt-3 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
+                  <span className="mt-2 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
                     <LockKeyhole className="h-5 w-5 text-slate-400" />
                     <input
                       value={password}
@@ -331,10 +331,10 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
                 </button>
               </div>
             ) : (
-              <div className="mt-6 space-y-4 xl:mt-7 xl:space-y-5">
+              <div className="mt-5 space-y-3 xl:space-y-4">
                 <label className="block">
                   <span className="text-sm font-bold text-slate-800">Phone Number</span>
-                  <span className="mt-3 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
+                  <span className="mt-2 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
                     <Phone className="h-5 w-5 text-slate-400" />
                     <input
                       value={phone}
@@ -348,7 +348,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
                 {otpSent && (
                   <label className="block">
                     <span className="text-sm font-bold text-slate-800">One-time Password</span>
-                    <span className="mt-3 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
+                    <span className="mt-2 flex h-16 items-center gap-3 rounded-2xl border border-slate-200 bg-white/70 px-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_24px_rgba(15,23,42,0.04)] focus-within:border-violet-300 focus-within:ring-4 focus-within:ring-violet-100">
                       <LockKeyhole className="h-5 w-5 text-slate-400" />
                       <input
                         value={otp}
@@ -375,7 +375,7 @@ export default function AuthPanel({ nextPath = "/dashboard", onSuccess, variant 
             {message && <div className="mt-5 rounded-2xl bg-emerald-500/10 p-4 text-sm font-semibold text-emerald-700">{message}</div>}
             {error && <div className="mt-5 rounded-2xl bg-red-500/10 p-4 text-sm font-semibold text-red-600">{error}</div>}
 
-            <p className="mt-8 text-center text-sm font-semibold text-slate-500">
+            <p className="mt-6 text-center text-sm font-semibold text-slate-500">
               Don&apos;t have an account?{" "}
               <button type="button" onClick={handleEmailAuth} className="font-black text-violet-600 transition hover:text-blue-600">
                 Register here
