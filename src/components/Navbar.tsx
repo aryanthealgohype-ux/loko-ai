@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Sparkles, LayoutGrid, Users, Menu, X, Sun, Moon } from "lucide-react";
+import { Sparkles, LayoutGrid, Users, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import AuthModal from "@/components/AuthModal";
-import { useTheme } from "@/components/ThemeProvider";
 import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
@@ -20,9 +19,7 @@ export default function Navbar() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
   const { user, isLoading } = useAuth();
-  const currentTheme = theme;
 
   useEffect(() => {
     const routesToPrefetch = [
@@ -105,20 +102,6 @@ export default function Navbar() {
           </div>
 
           <div className="hidden xl:flex shrink-0 items-center gap-3">
-            {/* Theme Toggle Button */}
-            <button
-              type="button"
-              aria-label={`Switch to ${currentTheme === "light" ? "dark" : "light"} mode`}
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="p-2.5 rounded-xl border border-slate-200 dark:border-white/10 bg-white/50 hover:bg-slate-100 dark:bg-white/5 dark:hover:bg-white/10 text-slate-700 dark:text-gray-300 transition-all duration-300 flex items-center justify-center group shadow-sm hover:shadow"
-            >
-              {currentTheme !== "light" ? (
-                <Moon className="w-4 h-4 group-hover:rotate-[360deg] transition-transform duration-500 text-sky-400" />
-              ) : (
-                <Sun className="w-4 h-4 group-hover:rotate-180 transition-transform duration-500 text-amber-500" />
-              )}
-            </button>
-
             <>
               {!isLoading && !user && pathname !== "/" ? (
                   <button
@@ -143,16 +126,6 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <div className="xl:hidden flex items-center gap-2 shrink-0">
-             <button
-                type="button"
-                aria-label={`Switch to ${currentTheme === "light" ? "dark" : "light"} mode`}
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className={`p-2 rounded-lg border transition-all duration-300 ${
-                  currentTheme !== "light" ? "bg-black border-[#00BFFF] text-white" : "bg-white border-[#00BFFF] text-black"
-                }`}
-              >
-                {currentTheme !== "light" ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
-              </button>
             <button
               type="button"
               aria-label={isOpen ? "Close menu" : "Open menu"}
