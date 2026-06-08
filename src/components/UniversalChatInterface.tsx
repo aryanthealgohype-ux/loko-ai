@@ -445,10 +445,10 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
   };
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-white dark:bg-slate-950">
+    <div className="flex h-dvh overflow-hidden bg-[#f5f5f3] text-[#1f1f1f] dark:bg-slate-950 dark:text-slate-100">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-[280px] border-r border-slate-100 bg-slate-50/50 px-4 py-6 backdrop-blur-xl transition-transform dark:border-white/10 dark:bg-slate-900/60 lg:static lg:h-dvh lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 w-[280px] border-r border-[#e8e8e5] bg-[#f7f7f5]/90 px-4 py-6 backdrop-blur-xl transition-transform dark:border-white/10 dark:bg-slate-900/60 lg:static lg:h-dvh lg:translate-x-0 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -462,12 +462,12 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 text-white shadow-sm">
                 <Sparkles className="h-5 w-5" />
               </span>
-              <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">LokoAI</span>
+              <span className="text-xl font-bold tracking-tight text-[#1f1f1f] dark:text-white">LokoAI</span>
             </button>
             <button
               type="button"
               onClick={() => setIsSidebarOpen(false)}
-              className="rounded-full p-2 text-slate-400 hover:bg-white hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white lg:hidden"
+              className="rounded-full p-2 text-[#7a7a7a] hover:bg-white hover:text-[#1f1f1f] dark:hover:bg-slate-800 dark:hover:text-white lg:hidden"
               aria-label="Close sidebar"
             >
               <X className="h-5 w-5" />
@@ -477,7 +477,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
           <button
             type="button"
             onClick={startNewChat}
-            className="group mb-2 flex h-11 w-full items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98] dark:border-white/10 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+            className="group mb-2 flex h-11 w-full items-center gap-3 rounded-xl border border-[#e8e8e5] bg-white px-4 text-sm font-semibold text-[#1f1f1f] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition hover:border-[#d9d9d5] hover:bg-[#fafafa] active:scale-[0.98] dark:border-white/10 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
           >
             <Plus className="h-4 w-4 text-slate-400 transition group-hover:text-slate-600 dark:group-hover:text-slate-200" />
             New chat
@@ -486,7 +486,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
           <button
             type="button"
             onClick={() => setIsSearchOpen((open) => !open)}
-            className="mb-6 flex h-11 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+            className="mb-6 flex h-11 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-[#7a7a7a] transition hover:bg-white hover:text-[#1f1f1f] dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
           >
             <Search className="h-4 w-4" />
             Search chats
@@ -494,7 +494,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
 
           {isSearchOpen && (
             <div className="mb-4 px-1">
-              <div className="flex h-11 items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 shadow-sm ring-2 ring-sky-50 dark:border-white/10 dark:bg-slate-900 dark:ring-sky-500/10">
+              <div className="flex h-11 items-center gap-2 rounded-xl border border-[#e8e8e5] bg-white px-3 shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:border-white/10 dark:bg-slate-900 dark:ring-sky-500/10">
                 <Search className="h-4 w-4 text-slate-400" />
                 <input
                   placeholder="Search messages..."
@@ -507,7 +507,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="mb-6 space-y-1 border-t border-slate-100 pt-6 dark:border-white/10">
+          <div className="mb-6 space-y-1 border-t border-[#e8e8e5] pt-6 dark:border-white/10">
             <p className="mb-3 px-4 text-[11px] font-bold uppercase tracking-[0.1em] text-slate-400">Navigation</p>
             <div className="space-y-0.5">
               {[
@@ -524,8 +524,8 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                   href={item.href}
                   className={`flex h-10 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium transition ${
                     item.href === "/collection"
-                      ? "border border-slate-100 bg-white text-sky-600 shadow-sm dark:border-white/10 dark:bg-slate-900 dark:text-sky-400"
-                      : "text-slate-500 hover:bg-white hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                      ? "border border-[#e8e8e5] bg-white text-sky-600 shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:border-white/10 dark:bg-slate-900 dark:text-sky-400"
+                      : "text-[#7a7a7a] hover:bg-white hover:text-[#1f1f1f] dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
                   }`}
                 >
                   <item.icon className={`h-4 w-4 ${item.href === "/collection" ? "text-sky-500" : ""}`} />
@@ -545,10 +545,10 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                 visibleHistory.map((session) => (
                   <div
                     key={session.id}
-                    className={`group flex items-center gap-2 rounded-xl border px-3 py-3 shadow-sm ring-1 transition ${
+                    className={`group flex items-center gap-2 rounded-xl border px-3 py-3 shadow-[0_2px_12px_rgba(0,0,0,0.04)] ring-1 transition ${
                       activeChatId === session.id
-                        ? "border-sky-100 bg-white ring-sky-100 dark:border-sky-400/20 dark:bg-slate-900 dark:ring-sky-400/10"
-                        : "border-slate-100 bg-white/70 ring-slate-100 hover:border-slate-200 hover:bg-white dark:border-white/10 dark:bg-slate-900/70 dark:ring-white/10 dark:hover:border-white/15"
+                        ? "border-[#e8e8e5] bg-white ring-[#e8e8e5] dark:border-sky-400/20 dark:bg-slate-900 dark:ring-sky-400/10"
+                        : "border-[#e8e8e5] bg-white/70 ring-[#e8e8e5] hover:border-[#d9d9d5] hover:bg-white dark:border-white/10 dark:bg-slate-900/70 dark:ring-white/10 dark:hover:border-white/15"
                     }`}
                   >
                     <button
@@ -558,7 +558,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                     >
                       <AssistantLogo assistant={assistant} size="sm" />
                       <div className="min-w-0">
-                        <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{session.title}</p>
+                        <p className="truncate text-sm font-bold text-[#1f1f1f] dark:text-white">{session.title}</p>
                         <p className="truncate text-[11px] text-slate-400">{assistant.name}</p>
                       </div>
                     </button>
@@ -574,19 +574,19 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                   </div>
                 ))
               ) : (
-                <div className="rounded-xl border border-dashed border-slate-200 px-3 py-4 text-xs font-medium text-slate-400 dark:border-white/10">
+                <div className="rounded-xl border border-dashed border-[#e8e8e5] px-3 py-4 text-xs font-medium text-[#7a7a7a] dark:border-white/10">
                   No saved chats yet.
                 </div>
               )}
             </div>
           </div>
 
-          <div className="mt-6 space-y-3 border-t border-slate-100 pt-6 dark:border-white/10">
+          <div className="mt-6 space-y-3 border-t border-[#e8e8e5] pt-6 dark:border-white/10">
             <div className="flex flex-col gap-1">
               <button
                 type="button"
                 onClick={() => router.push("/projects")}
-                className="flex h-10 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                className="flex h-10 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-[#7a7a7a] transition hover:bg-white hover:text-[#1f1f1f] dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
               >
                 <FolderOpen className="h-4 w-4" />
                 Projects
@@ -594,27 +594,27 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
               <button
                 type="button"
                 onClick={() => router.push("/settings")}
-                className="flex h-10 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-slate-500 transition hover:bg-white hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                className="flex h-10 w-full items-center gap-3 rounded-xl px-4 text-sm font-medium text-[#7a7a7a] transition hover:bg-white hover:text-[#1f1f1f] dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
               >
                 <Settings className="h-4 w-4" />
                 Settings
               </button>
             </div>
 
-            <div className="rounded-2xl border border-slate-100 bg-white p-3 shadow-sm ring-1 ring-slate-100 dark:border-white/10 dark:bg-slate-900 dark:ring-white/10">
+            <div className="rounded-2xl border border-[#e8e8e5] bg-white p-3 shadow-[0_2px_12px_rgba(0,0,0,0.04)] ring-1 ring-[#e8e8e5] dark:border-white/10 dark:bg-slate-900 dark:ring-white/10">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-900 text-sm font-bold text-white shadow-sm dark:bg-white dark:text-slate-900">
                   {userInitial}
                 </div>
                 <div className="min-w-0">
-                  <p className="truncate text-sm font-bold text-slate-900 dark:text-white">{userName}</p>
+                  <p className="truncate text-sm font-bold text-[#1f1f1f] dark:text-white">{userName}</p>
                   <p className="truncate text-[11px] text-slate-400">{userEmail}</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => void signOut()}
-                className="mt-3 flex h-9 w-full items-center gap-3 rounded-xl px-3 text-xs font-bold text-slate-500 transition hover:bg-red-50 hover:text-red-600 dark:text-slate-400 dark:hover:bg-red-500/10 dark:hover:text-red-400"
+                className="mt-3 flex h-9 w-full items-center gap-3 rounded-xl px-3 text-xs font-bold text-[#7a7a7a] transition hover:bg-red-50 hover:text-red-600 dark:text-slate-400 dark:hover:bg-red-500/10 dark:hover:text-red-400"
               >
                 <Bot className="h-3.5 w-3.5" />
                 Sign out
@@ -635,11 +635,11 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
 
       {/* Main Chat Area */}
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden">
-        <div className="sticky top-0 z-20 flex h-16 items-center justify-between bg-white/80 px-4 backdrop-blur-md dark:bg-slate-950/80">
+        <div className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-[#e8e8e5] bg-[#f7f7f5]/80 px-4 backdrop-blur-md dark:border-white/10 dark:bg-slate-950/80">
           <button
             type="button"
             onClick={() => setIsSidebarOpen(true)}
-            className="rounded-full p-2 text-slate-400 hover:bg-slate-50 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white lg:hidden"
+            className="rounded-full p-2 text-[#7a7a7a] hover:bg-white hover:text-[#1f1f1f] dark:hover:bg-slate-800 dark:hover:text-white lg:hidden"
             aria-label="Open sidebar"
           >
             <Menu className="h-5 w-5" />
@@ -649,7 +649,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
             <button
               type="button"
               onClick={() => router.push("/pricing")}
-              className="inline-flex h-9 items-center gap-2 rounded-full border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50 hover:text-slate-950 dark:border-white/10 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+              className="inline-flex h-9 items-center gap-2 rounded-full border border-[#e8e8e5] bg-white px-3 text-xs font-semibold text-[#1f1f1f] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition hover:bg-[#fafafa] dark:border-white/10 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
               aria-label="Upgrade"
               title="Upgrade"
             >
@@ -659,7 +659,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
             <button
               type="button"
               onClick={() => setTheme(isDarkMode ? "light" : "dark")}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-950 dark:border-white/10 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e8e8e5] bg-white text-[#7a7a7a] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition hover:bg-[#fafafa] hover:text-[#1f1f1f] dark:border-white/10 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white"
               aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
               title={isDarkMode ? "Light mode" : "Dark mode"}
             >
@@ -704,7 +704,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
 
         {/* Input Area */}
         <div
-          className="shrink-0 bg-white px-4 py-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] dark:bg-slate-950 sm:px-8 sm:py-6 sm:pb-[calc(1.5rem+env(safe-area-inset-bottom))]"
+          className="shrink-0 bg-[#f5f5f3] px-4 py-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] dark:bg-slate-950 sm:px-8 sm:py-6 sm:pb-[calc(1.5rem+env(safe-area-inset-bottom))]"
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -740,7 +740,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
             )}
 
             {/* Input Box */}
-            <div className="relative flex flex-col rounded-[28px] border border-slate-200 bg-white shadow-[0_16px_45px_rgba(15,23,42,0.08)] transition-all duration-300 focus-within:border-slate-300 dark:border-white/10 dark:bg-slate-900/82 dark:shadow-[0_24px_70px_rgba(2,8,23,0.45)] dark:ring-1 dark:ring-white/5 dark:backdrop-blur-xl dark:focus-within:border-sky-400/30">
+            <div className="relative flex flex-col rounded-[28px] border border-[#e8e8e5] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 focus-within:border-[#d9d9d5] dark:border-white/10 dark:bg-slate-900/82 dark:shadow-[0_24px_70px_rgba(2,8,23,0.45)] dark:ring-1 dark:ring-white/5 dark:backdrop-blur-xl dark:focus-within:border-sky-400/30">
               <div className="relative px-5 pt-5">
                 <textarea
                   value={prompt}
@@ -753,7 +753,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                   }}
                   placeholder={isSubmitting ? "Generating..." : "Ask LokoAI anything..."}
                   rows={2}
-                  className="max-h-60 min-h-[44px] w-full resize-none bg-transparent py-2.5 text-base leading-relaxed text-slate-900 outline-none placeholder:text-slate-400 dark:text-slate-100 dark:placeholder:text-slate-500"
+                  className="max-h-60 min-h-[44px] w-full resize-none bg-transparent py-2.5 text-base leading-relaxed text-[#1f1f1f] outline-none placeholder:text-[#7a7a7a] dark:text-slate-100 dark:placeholder:text-slate-500"
                 />
               </div>
 
@@ -763,14 +763,14 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                     <DropdownMenuTrigger asChild>
                       <button
                         type="button"
-                        className="flex h-10 w-10 items-center justify-center overflow-visible rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition hover:bg-slate-50 hover:text-slate-900 dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-slate-800"
+                        className="flex h-10 w-10 items-center justify-center overflow-visible rounded-full border border-[#e8e8e5] bg-white text-[#7a7a7a] shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition hover:bg-[#fafafa] hover:text-[#1f1f1f] dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-slate-800"
                         aria-label="Add content"
                         title="Add content"
                       >
                         <Plus className="size-5 overflow-visible" />
                       </button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-64 rounded-[24px] border border-slate-100 bg-white p-2 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:border-white/10 dark:bg-slate-900">
+                    <DropdownMenuContent align="start" className="w-64 rounded-[24px] border border-[#e8e8e5] bg-white p-2 shadow-[0_18px_44px_rgba(0,0,0,0.10)] dark:border-white/10 dark:bg-slate-900">
                       <DropdownMenuItem onClick={() => fileInputRef.current?.click()} className="flex items-center gap-3 rounded-[14px] px-3.5 py-3 text-[14.5px] cursor-pointer focus:bg-slate-50 dark:focus:bg-slate-800">
                         <Paperclip className="h-4.5 w-4.5 text-slate-500" />
                         <span className="font-medium text-slate-700 dark:text-slate-200">Add files & photos</span>
@@ -805,7 +805,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                   <button
                     type="button"
                     onClick={handleVoiceInput}
-                    className="flex h-10 w-10 items-center justify-center overflow-visible rounded-full text-slate-500 transition hover:bg-slate-50 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+                    className="flex h-10 w-10 items-center justify-center overflow-visible rounded-full text-[#7a7a7a] transition hover:bg-[#fafafa] hover:text-[#1f1f1f] dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100"
                     aria-label="Voice input"
                     title="Voice input"
                   >
@@ -819,7 +819,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
                   type="button"
                   onClick={sendMessage}
                   disabled={(!prompt.trim() && attachments.length === 0) || isSubmitting}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center overflow-visible rounded-xl bg-slate-900 text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-20 active:scale-95 dark:bg-sky-500 dark:hover:bg-sky-400"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center overflow-visible rounded-xl bg-[#1f1f1f] text-white shadow-[0_2px_12px_rgba(0,0,0,0.10)] transition hover:bg-black disabled:opacity-20 active:scale-95 dark:bg-sky-500 dark:hover:bg-sky-400"
                   aria-label="Send message"
                 >
                   {isSubmitting ? <Loader2 className="size-4 animate-spin overflow-visible" /> : <Send className="size-4 overflow-visible" />}
@@ -827,7 +827,7 @@ export default function UniversalChatInterface({ slug }: { slug: string }) {
               </div>
             </div>
 
-            <p className="mt-3 text-center text-xs text-slate-400 dark:text-slate-500">
+            <p className="mt-3 text-center text-xs text-[#7a7a7a] dark:text-slate-500">
               AI can make mistakes. Check important info.
             </p>
           </div>

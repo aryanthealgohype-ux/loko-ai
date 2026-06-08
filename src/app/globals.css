@@ -10,10 +10,16 @@
 
 :root {
   --asmani: #87CEEB;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --app-bg-top: #f7f7f5;
+  --app-bg: #f5f5f3;
+  --app-card: #ffffff;
+  --app-border: #e8e8e5;
+  --app-text: #1f1f1f;
+  --app-muted: #7a7a7a;
+  --background: #f5f5f3;
+  --foreground: #1f1f1f;
+  --card: #ffffff;
+  --card-foreground: #1f1f1f;
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: oklch(0.205 0 0);
@@ -45,10 +51,16 @@
 }
 
 .light {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --app-bg-top: #f7f7f5;
+  --app-bg: #f5f5f3;
+  --app-card: #ffffff;
+  --app-border: #e8e8e5;
+  --app-text: #1f1f1f;
+  --app-muted: #7a7a7a;
+  --background: #f5f5f3;
+  --foreground: #1f1f1f;
   --card: #ffffff;
-  --card-foreground: #0f172a;
+  --card-foreground: #1f1f1f;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
   --primary: #0f172a;
@@ -73,6 +85,12 @@
 }
 
 .dark {
+  --app-bg-top: #111827;
+  --app-bg: #111827;
+  --app-card: #1f2937;
+  --app-border: #374151;
+  --app-text: #f9fafb;
+  --app-muted: #9ca3af;
   --background: #111827;
   --foreground: #f9fafb;
   --card: #1f2937;
@@ -107,6 +125,12 @@
 }
 
 .midnight {
+  --app-bg-top: #020617;
+  --app-bg: #020617;
+  --app-card: #0a1020;
+  --app-border: #1e293b;
+  --app-text: #e2e8f0;
+  --app-muted: #94a3b8;
   --background: #020617;
   --foreground: #e2e8f0;
   --card: #0a1020;
@@ -135,6 +159,12 @@
 }
 
 .blue-neon {
+  --app-bg-top: #031b34;
+  --app-bg: #031b34;
+  --app-card: #062743;
+  --app-border: #0b4a72;
+  --app-text: #e0faff;
+  --app-muted: #7dd3fc;
   --background: #031b34;
   --foreground: #e0faff;
   --card: #062743;
@@ -163,6 +193,12 @@
 }
 
 .purple-ai {
+  --app-bg-top: #1a103d;
+  --app-bg: #1a103d;
+  --app-card: #24124f;
+  --app-border: #4c1d95;
+  --app-text: #faf5ff;
+  --app-muted: #c4b5fd;
   --background: #1a103d;
   --foreground: #faf5ff;
   --card: #24124f;
@@ -232,7 +268,9 @@ body {
   overscroll-behavior-y: auto;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  background-color: var(--background);
+  background:
+    linear-gradient(180deg, var(--app-bg-top, var(--background)) 0%, var(--background) 100%);
+  color: var(--foreground);
   transition: background-color 240ms ease, color 240ms ease;
 }
 
