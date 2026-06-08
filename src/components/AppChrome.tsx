@@ -18,6 +18,7 @@ const appRoutePrefixes = [
   "/generate",
   "/integrations",
   "/launchpad",
+  "/login",
   "/partners",
   "/pricing",
   "/profile",
