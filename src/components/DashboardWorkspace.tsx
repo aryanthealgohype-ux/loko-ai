@@ -50,7 +50,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
 import { useTheme } from "@/components/ThemeProvider";
-import { assistants } from "@/app/collection/collection-data";
+import { assistants, marketplaceCategories } from "@/app/collection/collection-data";
 import { FileCard, type FileCardData } from "@/components/file-card/FileCard";
 import { ModelPicker } from "@/components/ModelPicker";
 import UserMenu from "@/components/UserMenu";
@@ -1008,12 +1008,16 @@ function DashboardOverview({
   onOpenProject: (project: Project) => void;
   onOpenAgent: (slug: string) => void;
 }) {
-  const assignedAgents = assistants.slice(0, 10);
+  const assignedAgents = assistants;
   const totalConversations = projects.length;
   const generatedFiles = projects.reduce((count, project) => count + (project.generated_code?.length ?? 0), 0);
   const totalMessages = projects.reduce((count, project) => count + (project.chat_messages?.length ?? 0), 0);
   const recentProjects = projects.slice(0, 5);
   const popularAgents = assignedAgents.slice(0, 5);
+  const savedProjects = projects.length;
+  const availableCredits = "25k";
+  const apiReadiness = "Ready";
+  const teamSeats = "5";
   const activityDateFormatter = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" });
   const activityKeyFormatter = new Intl.DateTimeFormat("en-CA", {
     year: "numeric",
@@ -1059,10 +1063,10 @@ function DashboardOverview({
       <div className="relative mx-auto w-full max-w-[1500px] px-5 py-5 lg:px-7">
         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-500">Loko AI dashboard</p>
+            <p className="text-xs font-black uppercase tracking-[0.2em] text-sky-500">Loko AI operating system</p>
             <h1 className="mt-1.5 text-3xl font-black tracking-tight text-slate-950 sm:text-4xl">Your Dashboard</h1>
             <p className="mt-1.5 max-w-3xl text-sm text-slate-500">
-              Overview of your agent usage, conversation activity, model routing, workflows, and quick launch agents.
+              Monitor agent usage, credits, saved projects, analytics, team collaboration, API readiness, and AI execution workflows.
             </p>
           </div>
           <button
@@ -1077,10 +1081,10 @@ function DashboardOverview({
 
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {[
-            { label: "Assigned Agents", value: assignedAgents.length, note: "Agents ready to use", icon: Bot, tone: "from-blue-500 to-cyan-400" },
-            { label: "Total Conversations", value: totalConversations, note: "All your conversations", icon: History, tone: "from-emerald-500 to-teal-400" },
-            { label: "AI Messages", value: totalMessages, note: "Conversation activity", icon: FileText, tone: "from-violet-500 to-fuchsia-500" },
-            { label: "Generated Files", value: generatedFiles, note: "Project files created", icon: Database, tone: "from-orange-500 to-amber-400" },
+            { label: "Marketplace Agents", value: assignedAgents.length, note: `${marketplaceCategories.length} specialized categories`, icon: Bot, tone: "from-blue-500 to-cyan-400" },
+            { label: "Credits", value: availableCredits, note: "Monthly AI execution pool", icon: Zap, tone: "from-emerald-500 to-teal-400" },
+            { label: "Saved Projects", value: savedProjects, note: "Generated apps and workspaces", icon: FolderOpen, tone: "from-violet-500 to-fuchsia-500" },
+            { label: "API Settings", value: apiReadiness, note: `${teamSeats} team seats configured`, icon: Database, tone: "from-orange-500 to-amber-400" },
           ].map((stat) => (
             <div key={stat.label} className="group rounded-[24px] border border-slate-200/80 bg-white/82 p-4 shadow-[0_16px_54px_rgba(15,23,42,0.08)] backdrop-blur-xl transition hover:-translate-y-1 hover:shadow-[0_22px_72px_rgba(14,165,233,0.14)]">
               <div className="mb-4 flex items-center justify-between">
@@ -1091,6 +1095,23 @@ function DashboardOverview({
               </div>
               <p className="text-3xl font-black tracking-tight text-slate-950">{stat.value}</p>
               <p className="mt-1 text-xs text-slate-500">{stat.note}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 grid gap-3 lg:grid-cols-4">
+          {[
+            { label: "Saved chats", value: totalConversations, detail: "Conversation memory" },
+            { label: "AI responses", value: totalMessages, detail: "Messages generated" },
+            { label: "Generated files", value: generatedFiles, detail: "Builder artifacts" },
+            { label: "Analytics", value: "Live", detail: "Activity and usage pulse" },
+          ].map((item) => (
+            <div key={item.label} className="rounded-2xl border border-slate-200/80 bg-white/72 px-4 py-3 shadow-[0_12px_34px_rgba(15,23,42,0.06)] backdrop-blur-xl">
+              <p className="text-[11px] font-black uppercase tracking-[0.14em] text-slate-400">{item.label}</p>
+              <div className="mt-2 flex items-end justify-between gap-3">
+                <p className="text-xl font-black text-slate-950">{item.value}</p>
+                <p className="text-xs font-semibold text-slate-500">{item.detail}</p>
+              </div>
             </div>
           ))}
         </div>

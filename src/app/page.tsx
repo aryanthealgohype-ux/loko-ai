@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import {
-  Sparkles, Check, Star, ArrowRight
+  ArrowRight, Bot, Check, Code2, Layers3, Search, Sparkles, Star
 } from "lucide-react";
+import { assistants, marketplaceCategories } from "@/app/collection/collection-data";
 
 // Custom Brand SVG Icons (Since trademark brands are removed/unsupported in some lucide-react versions)
 const TwitterIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -339,6 +340,41 @@ const pricingPlans = [
   }
 ];
 
+const osCapabilities = [
+  "Multi-agent execution",
+  "Deep research reports",
+  "Builder mode",
+  "Browser operator",
+  "File and PDF analysis",
+  "Voice-ready workspace",
+];
+
+const recentTaskTypes = [
+  "Research Agent -> Business Agent -> Design Agent -> Final investor report",
+  "Next.js Expert -> Database Architect -> Code Reviewer -> Production SaaS plan",
+  "SEO Writer -> Social Media Manager -> Ad Creative Generator -> Launch campaign",
+  "PDF Analyzer -> Financial Analyst -> KPI Monitoring Agent -> Executive dashboard",
+];
+
+const faqItems = [
+  {
+    question: "Is Loko AI only a chatbot?",
+    answer: "No. Loko AI is designed as an AI operating system with agents, models, builder workflows, research, analytics, automation, and saved projects.",
+  },
+  {
+    question: "Can multiple agents work together?",
+    answer: "Yes. The agent marketplace is organized so users can route one task through research, business, design, development, analytics, or automation agents.",
+  },
+  {
+    question: "Does it support builders and code generation?",
+    answer: "Yes. Existing builder mode supports website, dashboard, React app, generated files, previews, and project persistence.",
+  },
+  {
+    question: "Which AI providers does it support?",
+    answer: "The platform routes through OpenRouter and supports GPT, Claude, Gemini, Qwen, Kimi, and other configured models.",
+  },
+];
+
 const heroParticles = [
   { left: "14%", top: "30%", size: "h-1.5 w-1.5", delay: 0.2, duration: 5.8 },
   { left: "23%", top: "62%", size: "h-2 w-2", delay: 1.1, duration: 6.4 },
@@ -380,6 +416,8 @@ export default function Home() {
   const [isYearly, setIsYearly] = useState(false);
   const router = useRouter();
   const goToLogin = () => router.push("/dashboard");
+  const featuredAgents = assistants.slice(0, 6);
+  const trendingAgents = assistants.slice(-6).reverse();
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-gradient-to-b from-white via-sky-50/35 to-white text-slate-900 dark:bg-slate-950 dark:text-white">
@@ -466,6 +504,160 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </section>
+
+      <section className="relative z-10 border-b border-slate-100 bg-white/80 px-4 py-16 backdrop-blur-xl dark:border-white/5 dark:bg-slate-950/60 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+            <div>
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-sky-600 dark:border-sky-400/20 dark:bg-sky-400/10 dark:text-sky-300">
+                <Layers3 className="h-3.5 w-3.5" />
+                Ultimate AI Operating System
+              </div>
+              <h2 className="text-3xl font-black tracking-tight text-slate-950 dark:text-white sm:text-5xl">
+                One workspace for research, creation, coding, analysis, automation, and business execution.
+              </h2>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600 dark:text-slate-300 sm:text-lg">
+                Loko AI combines a premium chat experience, model routing, builder mode, deep research, file intelligence, and a full marketplace of specialized AI agents.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={goToLogin}
+              className="group flex min-h-[92px] items-center gap-4 rounded-[28px] border border-slate-200 bg-white p-4 text-left shadow-[0_22px_70px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:border-sky-200 dark:border-white/10 dark:bg-white/5"
+            >
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-lg shadow-slate-300/30 dark:bg-sky-500">
+                <Search className="h-6 w-6" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-black text-slate-950 dark:text-white">AI Search Bar</span>
+                <span className="mt-1 block text-sm leading-6 text-slate-500 dark:text-slate-400">
+                  Ask for a report, website, SaaS app, analysis, automation, or multi-agent workflow.
+                </span>
+              </span>
+              <ArrowRight className="h-5 w-5 text-slate-400 transition group-hover:translate-x-1 group-hover:text-sky-500" />
+            </button>
+          </div>
+
+          <div className="mb-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+            {osCapabilities.map((capability) => (
+              <div key={capability} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_12px_34px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-white/5">
+                <Sparkles className="mb-3 h-4 w-4 text-sky-500" />
+                <p className="text-sm font-bold text-slate-800 dark:text-slate-100">{capability}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            <div className="rounded-[30px] border border-slate-200 bg-white p-5 shadow-[0_20px_70px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2">
+                  <Bot className="h-4 w-4 text-sky-500" />
+                  <h3 className="text-lg font-black text-slate-950 dark:text-white">Featured Agents</h3>
+                </div>
+                <button onClick={() => router.push("/collection")} className="text-xs font-black text-sky-600 dark:text-sky-300">
+                  View marketplace
+                </button>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {featuredAgents.map((agent) => (
+                  <button
+                    key={agent.slug}
+                    type="button"
+                    onClick={() => router.push(`/collection/${agent.slug}`)}
+                    className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-3 text-left transition hover:-translate-y-0.5 hover:border-sky-200 hover:bg-white dark:border-white/10 dark:bg-white/5"
+                  >
+                    <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${agent.accent} text-white`}>
+                      <agent.icon className="h-4 w-4" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-black text-slate-950 dark:text-white">{agent.name}</span>
+                      <span className="block truncate text-xs text-slate-500 dark:text-slate-400">{agent.specializations.slice(0, 2).join(" + ")}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[30px] border border-slate-200 bg-white p-5 shadow-[0_20px_70px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5">
+              <div className="mb-4 flex items-center gap-2">
+                <Code2 className="h-4 w-4 text-emerald-500" />
+                <h3 className="text-lg font-black text-slate-950 dark:text-white">Trending Agent Workflows</h3>
+              </div>
+              <div className="space-y-3">
+                {recentTaskTypes.map((task) => (
+                  <div key={task} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 text-sm font-semibold leading-6 text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
+                    {task}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
+            <div className="rounded-[30px] border border-slate-200 bg-slate-950 p-5 text-white shadow-[0_20px_70px_rgba(15,23,42,0.14)] dark:border-white/10">
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-300">Agent Categories</p>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {marketplaceCategories.map((category) => (
+                  <button
+                    key={category.name}
+                    type="button"
+                    onClick={() => router.push("/collection")}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition hover:bg-white/10"
+                  >
+                    <span className={`mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br ${category.accent}`}>
+                      <category.icon className="h-4 w-4" />
+                    </span>
+                    <span className="block text-sm font-black">{category.name}</span>
+                    <span className="mt-1 block text-xs text-slate-400">{category.count} agents</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[30px] border border-slate-200 bg-white p-5 shadow-[0_20px_70px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5">
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h3 className="text-lg font-black text-slate-950 dark:text-white">FAQ</h3>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500 dark:bg-white/10 dark:text-slate-300">Production ready</span>
+              </div>
+              <div className="grid gap-3 md:grid-cols-2">
+                {faqItems.map((item) => (
+                  <div key={item.question} className="rounded-2xl border border-slate-100 bg-slate-50/80 p-4 dark:border-white/10 dark:bg-white/5">
+                    <p className="text-sm font-black text-slate-950 dark:text-white">{item.question}</p>
+                    <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">{item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 rounded-[30px] border border-slate-200 bg-white p-5 shadow-[0_20px_70px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5">
+            <div className="mb-4 flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-rose-500" />
+              <h3 className="text-lg font-black text-slate-950 dark:text-white">Trending Agents</h3>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {trendingAgents.map((agent) => (
+                <button
+                  key={agent.slug}
+                  type="button"
+                  onClick={() => router.push(`/collection/${agent.slug}`)}
+                  className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-3 text-left transition hover:-translate-y-0.5 hover:border-sky-200 hover:bg-white dark:border-white/10 dark:bg-white/5"
+                >
+                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${agent.accent} text-white`}>
+                    <agent.icon className="h-4 w-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm font-black text-slate-950 dark:text-white">{agent.name}</span>
+                    <span className="block truncate text-xs text-slate-500 dark:text-slate-400">{agent.model}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="relative z-10 overflow-hidden border-y border-slate-100 bg-slate-50/50 py-8 dark:border-white/5 dark:bg-slate-950/20 sm:py-10">
         <div className="max-w-7xl mx-auto px-4 mb-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-sky-600 dark:text-sky-400">
